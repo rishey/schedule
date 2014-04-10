@@ -10,7 +10,7 @@ describe Parser do
     cmdLineArgs = []
     parser = Parser.new(cmdLineArgs)
 
-    it "contains the command linearguments passed in in an array called args" do
+    it "contains the command line arguments passed in in an array called args" do
       expect(parser.args).to eq(cmdLineArgs)
     end
 
@@ -22,6 +22,7 @@ describe Parser do
       expect(parser.default?).to eq(true)
     end
 
+
   end
 
   context "Help given as single argument" do
@@ -31,6 +32,10 @@ describe Parser do
       cmdLineArgs = ["HELP"]
       parser = Parser.new(cmdLineArgs)
 
+      it "returns false for the method default?" do
+        expect(parser.default?).to eq(false)
+      end
+
       it "returns a true value for help?" do
         expect(parser.help?).to eq(true)
       end
@@ -38,24 +43,84 @@ describe Parser do
     end
 
     context "Help argument lowercase" do
+      cmdLineArgs = ["help"]
+      parser = Parser.new(cmdLineArgs)
+
+      it "returns false for the method default?" do
+        expect(parser.default?).to eq(false)
+      end
+
+      it "returns a true value for help?" do
+        expect(parser.help?).to eq(true)
+      end
+
     end
 
     context "Help argument mixed case" do
+      cmdLineArgs = ["Help"]
+      parser = Parser.new(cmdLineArgs)
+
+      it "returns false for the method default?" do
+        expect(parser.default?).to eq(false)
+      end
+
+      it "returns a true value for help?" do
+        expect(parser.help?).to eq(true)
+      end
+
     end
 
     context "Help argument preceeded by single dash" do
+      cmdLineArgs = ["-HELP"]
+      parser = Parser.new(cmdLineArgs)
+
+      it "returns false for the method default?" do
+        expect(parser.default?).to eq(false)
+      end
+
+      it "returns a true value for help?" do
+        expect(parser.help?).to eq(true)
+      end
+
     end
 
     context "Help argument preceeded by double dash" do
+      cmdLineArgs = ["--HELP"]
+      parser = Parser.new(cmdLineArgs)
+
+      it "returns false for the method default?" do
+        expect(parser.default?).to eq(false)
+      end
+
+      it "returns a true value for help?" do
+        expect(parser.help?).to eq(true)
+      end
     end
 
-    context "help argument as single letter h preceeded by single dash" do
-    end
+    context "Help argument preceeded by tripple dash" do
+      cmdLineArgs = ["---HELP"]
+      parser = Parser.new(cmdLineArgs)
 
-    context "help argument as single letter h preceeded by double dash" do
+      it "returns false for the method default?" do
+        expect(parser.default?).to eq(false)
+      end
+
+      it "returns a false value for help?" do
+        expect(parser.help?).to eq(false)
+      end
     end
 
     context "help argument as question mark" do
+      cmdLineArgs = ["?"]
+      parser = Parser.new(cmdLineArgs)
+
+      it "returns false for the method default?" do
+        expect(parser.default?).to eq(false)
+      end
+
+      it "returns a false value for help?" do
+        expect(parser.help?).to eq(true)
+      end
     end
 
   end
