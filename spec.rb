@@ -26,6 +26,10 @@ describe Interface do
       expect(interface.parameters).to eq({:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"})
     end
 
+    it "returns hash for getSchedule method" do
+      expect(interface.getSchedule).to be_a(Hash)
+    end
+
   end
 
   context "Help given as first argument" do

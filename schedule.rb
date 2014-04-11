@@ -36,6 +36,10 @@ class Interface
     end
   end
 
+  def getSchedule
+    schedule = {}
+  end
+
 end
 
 interface = Interface.new(ARGV)
