@@ -1,9 +1,15 @@
 class Interface
-  attr_reader :args, :helpText
+  attr_reader :args
 
   def initialize args
     @args = args
-    @helpText = "This is line 1 of help text.\nThis is line 2.\n"
+    @helpText = "usage: schedule.rb [help]
+                    [-s start_date] [-f frequency] [-d day_of_week]
+                    No Arguments runs defaults -s today -f bi-weekly -d friday\n"
+
+    if self.help?
+      print @helpText
+    end
   end
 
   def default?
@@ -25,12 +31,14 @@ class Interface
   end
 
   def parameters
-    {:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
+    if self.default?
+      {:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
+    end
   end
 
 end
 
 interface = Interface.new(ARGV)
-p interface.default?
-p interface.help?
-
+# p interface.default?
+# p interface.help?
+# p interface.parameters

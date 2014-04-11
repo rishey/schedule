@@ -30,6 +30,7 @@ describe Interface do
 
   context "Help given as first argument" do
 
+
     context "Help argument uppercase" do
 
       cmdLineArgs = ["HELP"]
