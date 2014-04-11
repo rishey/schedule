@@ -14,8 +14,9 @@ class Parser
   end
 
   def help?
-    # if @args[0].downcase == "help" || @args[0].downcase == "-help"
-    if @args[0].downcase.match('\A-{0,2}help\z')
+    if @args.count == 0
+      false
+    elsif @args[0].downcase.match('\A-{0,2}help\z') || @args[0] == "?"
       true
     else
       false
@@ -24,3 +25,6 @@ class Parser
 
 end
 
+parser = Parser.new(ARGV)
+p parser.default?
+p parser.help?

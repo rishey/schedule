@@ -25,7 +25,7 @@ describe Parser do
 
   end
 
-  context "Help given as single argument" do
+  context "Help given as first argument" do
 
     context "Help argument uppercase" do
 
@@ -124,5 +124,7 @@ describe Parser do
     end
 
   end
+
+  context ""
 
 end
