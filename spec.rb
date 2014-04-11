@@ -1,4 +1,5 @@
 require "./schedule.rb"
+require 'Date'
 
 # TESTING WITH NO ARGUMENTS
 
@@ -26,8 +27,12 @@ describe Interface do
       expect(interface.parameters).to eq({:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"})
     end
 
-    it "returns hash for getSchedule method" do
-      expect(interface.getSchedule).to be_a(Hash)
+    it "returns array for getSchedule method" do
+      expect(interface.getSchedule).to be_a(Array)
+    end
+
+    it "returns array for getSchedule where first value is = today" do
+      expect(interface.getSchedule).to start_with(Date.today)
     end
 
   end

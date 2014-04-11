@@ -1,3 +1,6 @@
+require 'Date'
+require './helpers.rb'
+
 class Interface
   attr_reader :args
 
@@ -10,6 +13,7 @@ class Interface
     if self.help?
       print @helpText
     end
+
   end
 
   def default?
@@ -37,7 +41,8 @@ class Interface
   end
 
   def getSchedule
-    schedule = {}
+    schedule = []
+    schedule.push(Date.today)
   end
 
 end
