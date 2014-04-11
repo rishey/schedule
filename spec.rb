@@ -1,8 +1,7 @@
 require "./schedule.rb"
 require 'Date'
 
-# TESTING WITH NO ARGUMENTS
-
+# TESTING  INTERFACE WITH NO ARGUMENTS
 
 describe Interface do
 
@@ -31,8 +30,8 @@ describe Interface do
       expect(interface.getSchedule).to be_a(Array)
     end
 
-    it "returns array for getSchedule where first value is = today" do
-      expect(interface.getSchedule).to start_with(Date.today)
+    it "returns array for getSchedule where first value is = today if friday or next friday" do
+      expect(interface.getSchedule).to start_with(findFriday(Date.today))
     end
 
   end

@@ -42,7 +42,10 @@ class Interface
 
   def getSchedule
     schedule = []
-    schedule.push(Date.today)
+    startDate = self.parameters[:startDate]
+    frequency = self.parameters[:frequency]
+    dayOfWeek = self.parameters[:dayOfWeek]
+    schedule
   end
 
 end

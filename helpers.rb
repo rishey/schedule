@@ -6,5 +6,3 @@ def findFriday(date)
   end
   date
 end
-
-p findFriday(Date.today)
