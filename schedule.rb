@@ -45,6 +45,20 @@ class Interface
     startDate = self.parameters[:startDate]
     frequency = self.parameters[:frequency]
     dayOfWeek = self.parameters[:dayOfWeek]
+
+    if startDate.downcase == "today"
+      startDate = Date.today
+    end
+
+    startDate = findFriday(startDate)
+    stopDate = startDate.next_year
+    currentPayDate = startDate
+
+    while currentPayDate < stopDate-1
+      schedule.push(currentPayDate)
+      currentPayDate += 14
+    end
+
     schedule
   end
 

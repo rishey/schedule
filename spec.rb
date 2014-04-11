@@ -34,6 +34,14 @@ describe Interface do
       expect(interface.getSchedule).to start_with(findFriday(Date.today))
     end
 
+    it "returns an array where the last value is the 25 Fridays later than the startDate" do
+      expect(interface.getSchedule).to end_with(findFriday(Date.today).+350)
+    end
+
+    it "returns an array containing 26 pay dates" do
+      expect(interface.getSchedule.count).to eq(26)
+    end
+
   end
 
   context "Help given as first argument" do
