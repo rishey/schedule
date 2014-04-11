@@ -1,8 +1,9 @@
-class Parser
-  attr_reader :args
+class Interface
+  attr_reader :args, :helpText
 
   def initialize args
     @args = args
+    @helpText = "This is line 1 of help text.\nThis is line 2.\n"
   end
 
   def default?
@@ -23,8 +24,13 @@ class Parser
     end
   end
 
+  def parameters
+    {:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
+  end
+
 end
 
-parser = Parser.new(ARGV)
-p parser.default?
-p parser.help?
+interface = Interface.new(ARGV)
+p interface.default?
+p interface.help?
+
