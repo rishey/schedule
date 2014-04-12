@@ -8,9 +8,14 @@ def findFriday(date)
 end
 
 def parseDate(dateString)
-  parseHash={}
-  if (parseHash=dateString.match('(\d\d)[\/\-\.]?(\d\d)[\/\-\.]?(\d{4})'))
-    return parseHash
+  dateHash = {}
+  if (dateHash=dateHashString.match('(\d\d)[\/\-\.]?(\d\d)[\/\-\.]?(\d{4})'))
+    month = dateHash[1].to_i
+    day = dateHash[2].to_i
+    year = dateHash[3].to_i
+    p Date.valid_date?(year,month,day)
+    p "that was the valid date t or f"
+    return Date.new(year,month,day)
   else
     return false
   end

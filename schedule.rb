@@ -64,7 +64,7 @@ class Interface
 
 end
 
-p parseDate("02/30/2014")
+p "parce date: #{parseDate("03/01/2014")}"
 
 # interface = Interface.new(ARGV)
 # p ARGV
