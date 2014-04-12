@@ -44,6 +44,9 @@ describe Interface do
 
   end
 
+
+
+
   context "Help given as first argument" do
 
 
@@ -145,6 +148,5 @@ describe Interface do
 
   end
 
-  context ""
 
 end

@@ -64,7 +64,7 @@ class Interface
 
 end
 
-interface = Interface.new(ARGV)
+# interface = Interface.new(ARGV)
 # p interface.default?
 # p interface.help?
 # p interface.parameters
