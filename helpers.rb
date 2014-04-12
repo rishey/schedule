@@ -6,3 +6,12 @@ def findFriday(date)
   end
   date
 end
+
+def parseDate(dateString)
+  parseHash={}
+  if (parseHash=dateString.match('(\d\d)[\/\-\.]?(\d\d)[\/\-\.]?(\d{4})'))
+    return parseHash
+  else
+    return false
+  end
+end

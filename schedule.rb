@@ -64,7 +64,10 @@ class Interface
 
 end
 
+p parseDate("02/30/2014")
+
 # interface = Interface.new(ARGV)
+# p ARGV
 # p interface.default?
 # p interface.help?
 # p interface.parameters
