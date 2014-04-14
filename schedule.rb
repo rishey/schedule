@@ -3,33 +3,43 @@ require './helpers.rb'
 
 class Interface
   attr_reader :args
+  attr_accessor :parameters
 
   def initialize args
     @args = args
     @helpText = "usage: schedule.rb [help]
                     [-s start_date] [-f frequency] [-d day_of_week]
                     No Arguments runs defaults -s today -f bi-weekly -d friday\n"
+    @parameters = {}
 
     if self.help?
       print @helpText
     elsif self.default?
       p self.getSchedule
-    else
-      p self.parse
+    elsif self.parse
+      p @parameters
       # if parse == false then means bad commands = error
+      p self.getSchedule
+
     end
   end
 
   def parse
     if @args[0].downcase == "-s"
-
+      if startDate = parseDate(@args[1])
+        @parameters = {:startDate=>startDate, :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
+      else
+        return false
+      end
+    else
+      false
     end
-    return false
   end
 
   def default?
     if @args.count == 0
-      true
+      @parameters = {:startDate=>Date.today, :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
+      return true
     else
       false
     end
@@ -53,13 +63,13 @@ class Interface
 
   def getSchedule
     schedule = []
-    startDate = self.parameters[:startDate]
-    frequency = self.parameters[:frequency]
-    dayOfWeek = self.parameters[:dayOfWeek]
+    startDate = @parameters[:startDate]
+    frequency = @parameters[:frequency]
+    dayOfWeek = @parameters[:dayOfWeek]
 
-    if startDate.downcase == "today"
-      startDate = Date.today
-    end
+    # if startDate.downcase == "today"
+    #   startDate = Date.today
+    # end
 
     startDate = findFriday(startDate)
     stopDate = startDate.next_year

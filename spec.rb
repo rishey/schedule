@@ -52,7 +52,7 @@ describe Interface do
 
   end
 
-  context "Bad Arguments Given" do
+  context "Bad Arguments" do
     cmdLineArgs = ["adsfdsf" "df3jas"]
     interface = Interface.new(cmdLineArgs)
 
