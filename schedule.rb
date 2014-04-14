@@ -55,11 +55,11 @@ class Interface
     end
   end
 
-  def parameters
-    if self.default?
-      {:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
-    end
-  end
+  # def parameters
+  #   if self.default?
+  #     {:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
+  #   end
+  # end
 
   def getSchedule
     schedule = []
