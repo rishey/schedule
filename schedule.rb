@@ -13,14 +13,13 @@ class Interface
     # @parameters = {}
 
     if self.help?
-      print @helpText
+      # print @helpText
     elsif default?
-      p getSchedule
+      # p getSchedule
     else
-      p @parameters
       self.parse
       # if parse == false then means bad commands = error
-      p getSchedule
+      # p getSchedule
 
     end
 
@@ -78,7 +77,7 @@ class Interface
       currentPayDate += 14
     end
 
-    schedule
+    return schedule
   end
 
 end
