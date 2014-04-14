@@ -10,20 +10,26 @@ describe Interface do
     cmdLineArgs = []
     interface = Interface.new(cmdLineArgs)
 
-    it "contains the command line arguments passed in in an array called args" do
-      expect(interface.args).to eq(cmdLineArgs)
+    describe "#initialize" do
+      it "contains the command line arguments passed in in an array called args" do
+        expect(interface.args).to eq(cmdLineArgs)
+      end
+
+      it "contains the same number of items in interface.args as in cmdLineArgs " do
+        expect(interface.args.count).to eq(cmdLineArgs.count)
+      end
     end
 
-    it "contains the same number of items in interface.args as in cmdLineArgs " do
-      expect(interface.args.count).to eq(cmdLineArgs.count)
+    describe "#default?" do
+      it "returns true for method default? if there are no cmdLineArgs" do
+        expect(interface.default?).to eq(true)
+      end
     end
 
-    it "returns true for method default? if there are no cmdLineArgs" do
-      expect(interface.default?).to eq(true)
-    end
-
-    it "returns the default parameters as a hash" do
-      expect(interface.parameters).to eq({:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"})
+    describe ".parameters" do
+      it "returns the default parameters as a hash" do
+        expect(interface.parameters).to eq({:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"})
+      end
     end
 
     it "returns array for getSchedule method" do
