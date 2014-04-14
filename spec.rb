@@ -52,6 +52,18 @@ describe Interface do
 
   end
 
+  context "Bad Arguments Given" do
+    cmdLineArgs = ["adsfdsf" "df3jas"]
+    interface = Interface.new(cmdLineArgs)
+
+    describe "#initialize" do
+      it "returns false" do
+        expect(interface.parse).to eq(false)
+      end
+    end
+
+  end
+
   context "Only Start Date Given as Argument" do
 
     cmdLineArgs = ["-s" "03/01/2014"]

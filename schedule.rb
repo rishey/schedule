@@ -12,8 +12,19 @@ class Interface
 
     if self.help?
       print @helpText
+    elsif self.default?
+      p self.getSchedule
+    else
+      p self.parse
+      # if parse == false then means bad commands = error
     end
+  end
 
+  def parse
+    if @args[0].downcase == "-s"
+
+    end
+    return false
   end
 
   def default?
@@ -64,9 +75,9 @@ class Interface
 
 end
 
-parseDate("03-01-2014")
+# parseDate("03-01-2014")
 
-# interface = Interface.new(ARGV)
+interface = Interface.new(ARGV)
 # p ARGV
 # p interface.default?
 # p interface.help?
