@@ -10,29 +10,30 @@ class Interface
     @helpText = "usage: schedule.rb [help]
                     [-s start_date] [-f frequency] [-d day_of_week]
                     No Arguments runs defaults -s today -f bi-weekly -d friday\n"
-    @parameters = {}
+    # @parameters = {}
 
     if self.help?
       print @helpText
-    elsif self.default?
-      p self.getSchedule
-    elsif self.parse
+    elsif default?
+      p getSchedule
+    else
       p @parameters
+      self.parse
       # if parse == false then means bad commands = error
-      p self.getSchedule
+      p getSchedule
 
     end
+
   end
 
   def parse
-    if @args[0].downcase == "-s"
-      if startDate = parseDate(@args[1])
-        @parameters = {:startDate=>startDate, :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
-      else
-        return false
-      end
+    if @args[0].downcase == "-s"  # && parseDate(@args[1]))
+      p @args
+      startDate = parseDate(@args[1])
+      p "#{startDate} is STARTDATE"
+      @parameters = {:startDate=>startDate, :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
     else
-      false
+      return false
     end
   end
 
@@ -67,13 +68,10 @@ class Interface
     frequency = @parameters[:frequency]
     dayOfWeek = @parameters[:dayOfWeek]
 
-    # if startDate.downcase == "today"
-    #   startDate = Date.today
-    # end
-
-    startDate = findFriday(startDate)
-    stopDate = startDate.next_year
-    currentPayDate = startDate
+    p startDate = findFriday(startDate)
+    p stopDate = startDate.next_year
+    p currentPayDate = startDate
+    p @parameters
 
     while currentPayDate < stopDate-1
       schedule.push(currentPayDate)

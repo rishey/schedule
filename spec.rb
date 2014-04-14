@@ -87,7 +87,7 @@ describe Interface do
 
     describe ".parameters" do
       it "returns the the startDate of '03/01/2014'" do
-        expect(interface.parameters).to eq({:startDate=>"03/01/2014", :frequency=>"bi-weekly", :dayOfWeek=>"friday"})
+        expect(@parameters[:startDate]).to eq("03/01/2014")
       end
     end
 
