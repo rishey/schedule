@@ -2,7 +2,7 @@ require 'Date'
 require './helpers.rb'
 
 class Interface
-  attr_reader :args
+  attr_reader :args, :schedule
   attr_accessor :parameters
 
   def initialize args
@@ -13,12 +13,15 @@ class Interface
     @parameters = {}
 
     if self.help?
-      print @helpText
+      @helpText
     elsif default?
-      p getSchedule
+      schedule = getSchedule
+      # schedule.each do |date|
+      #   p date.to_s
+      # end
     elsif parse
       # if parse == false then means bad commands = error
-      p getSchedule
+      getSchedule
     end
   end
 
@@ -78,7 +81,7 @@ class Interface
       currentPayDate = startDate
       while currentPayDate < stopDate - 1
         schedule.push(currentPayDate)
-        p currentPayDate = findNextWeekday(currentPayDate+1)
+        currentPayDate = findNextWeekday(currentPayDate+1)
       end
     end
 
@@ -87,9 +90,7 @@ class Interface
 
 end
 
-# parseDate("03-01-2014")
-
-interface = Interface.new(ARGV)
+Interface.new(ARGV)
 # p ARGV
 # p interface.default?
 # p interface.help?
