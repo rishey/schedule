@@ -97,7 +97,7 @@ describe Interface do
       end
 
       it "returns array where first value is = today if friday or next friday" do
-        expect(interface.getSchedule).to start_with(findFriday(Date.today))
+        expect(interface.getSchedule).to start_with(findFriday(Date.new(2014,03,01)))
       end
 
       it "returns an array where the last value is the 25 Fridays later than the startDate" do
