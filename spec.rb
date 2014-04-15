@@ -53,7 +53,7 @@ describe Interface do
   end
 
   context "Bad Arguments" do
-    cmdLineArgs = ["adsfdsf" "df3jas"]
+    cmdLineArgs = ["adsfdsf", "df3jas"]
     interface = Interface.new(cmdLineArgs)
 
     describe "#initialize" do
@@ -66,7 +66,7 @@ describe Interface do
 
   context "Only Start Date Given as Argument" do
 
-    cmdLineArgs = ["-s" "03/01/2014"]
+    cmdLineArgs = ["-s" ,"03/01/2014"]
     interface = Interface.new(cmdLineArgs)
 
     describe "#initialize" do
