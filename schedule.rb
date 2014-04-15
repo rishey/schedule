@@ -14,12 +14,11 @@ class Interface
 
     if self.help?
       print @helpText
-    elsif self.default?
-      p self.getSchedule
-    elsif self.parse
-      p @parameters
+    elsif default?
+      p getSchedule
+    elsif parse
       # if parse == false then means bad commands = error
-      p self.getSchedule
+      p getSchedule
     end
   end
 
@@ -53,12 +52,6 @@ class Interface
       false
     end
   end
-
-  # def parameters
-  #   if self.default?
-  #     {:startDate=>"today", :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
-  #   end
-  # end
 
   def getSchedule
     schedule = []
