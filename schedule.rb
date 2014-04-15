@@ -1,21 +1,18 @@
 require 'Date'
 require './helpers.rb'
+require 'optparse'
 
 class Interface
   attr_reader :args, :helpText, :schedule
   attr_accessor :parameters
 
   def initialize args
-    @args = args
-    @helpText = "usage: schedule.rb [help]
-                    [-s start_date] [-f frequency] [-d day_of_week]
-                    No Arguments runs defaults -s today -f bi-weekly -d friday\n"
+    p @args = args
+    p "THOSE WERE THE ARGS"
+
     @parameters = {}
 
-    if self.help?
-      print @helpText
-
-    elsif default?
+    if default?
       printOut(getSchedule)
     elsif parse
       printOut(getSchedule)
@@ -49,7 +46,7 @@ class Interface
   end
 
   def default?
-    if @args.count == 0
+    if @args[0] == nil && @args[1] == nil
       @parameters = {:startDate=>Date.today, :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
       return true
     else
@@ -57,15 +54,7 @@ class Interface
     end
   end
 
-  def help?
-    if @args.count == 0
-      false
-    elsif @args[0].downcase.match('\A-{0,2}help\z') || @args[0] == "?"
-      true
-    else
-      false
-    end
-  end
+
 
   def getSchedule
     schedule = []
@@ -123,7 +112,16 @@ class Interface
 
 end
 
-Interface.new(ARGV)
+OptionParser.new do |o|
+  o.on('-s STARTDATE') { |startDate| $startDate = startDate }
+  o.on('-f FREQUENCY') { |frequency| $frequency = frequency }
+  o.on('-help') { puts o; exit }
+  o.parse!
+end
+p $startDate
+p $frequency
+p ARGV
+Interface.new([$frequency,$startDate])
 # if i.help?
 #   print i.helpText
 # end
