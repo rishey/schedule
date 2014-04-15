@@ -52,6 +52,55 @@ describe Interface do
 
   end
 
+  context "Weekly Frequency" do
+
+    cmdLineArgs = ["-f", "weekly"]
+    interface = Interface.new(cmdLineArgs)
+
+    describe "#initialize" do
+      it "contains the command line arguments passed in in an array called args" do
+        expect(interface.args).to eq(cmdLineArgs)
+      end
+
+      it "contains the same number of items in interface.args as in cmdLineArgs " do
+        expect(interface.args.count).to eq(cmdLineArgs.count)
+      end
+    end
+
+    describe "#default?" do
+      it "returns true if there are no cmdLineArgs" do
+        expect(interface.default?).to eq(false)
+      end
+    end
+
+    describe ".parameters" do
+      it "returns a hash" do
+        expect(interface.parameters).to be_a(Hash)
+      end
+    end
+
+    describe "#getSchedule" do
+      it "returns array" do
+        expect(interface.getSchedule).to be_a(Array)
+      end
+
+      it "returns array where first value is = today if friday or next friday" do
+        expect(interface.getSchedule).to start_with(findFriday(Date.today))
+      end
+
+      it "returns an array where the last value is the 52 Fridays later than the startDate" do
+        expect(interface.getSchedule).to end_with(findFriday(Date.today+355))
+      end
+
+      it "returns an array containing 52 pay dates" do
+        expect(interface.getSchedule.count).to eq(52)
+      end
+    end
+
+  end
+
+
+
   context "Bad Arguments" do
     cmdLineArgs = ["adsfdsf", "df3jas"]
     interface = Interface.new(cmdLineArgs)
