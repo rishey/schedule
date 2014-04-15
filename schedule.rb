@@ -29,6 +29,8 @@ class Interface
       else
         return false
       end
+    elsif @args[0].downcase == "-f" && @args[1].downcase == "daily"
+      @parameters = {:startDate=>Date.today, :frequency=>"daily"}
     else
       false
     end
@@ -62,14 +64,22 @@ class Interface
     # if startDate.downcase == "today"
     #   startDate = Date.today
     # end
-
-    startDate = findFriday(startDate)
-    stopDate = startDate.next_year
-    currentPayDate = startDate
-
-    while currentPayDate < stopDate-1
-      schedule.push(currentPayDate)
-      currentPayDate += 14
+    if frequency.downcase == "bi-weekly"
+      startDate = findFriday(startDate)
+      stopDate = startDate.next_year
+      currentPayDate = startDate
+      while currentPayDate < stopDate-1
+        schedule.push(currentPayDate)
+        currentPayDate += 14
+      end
+    elsif frequency.downcase == "daily"
+      startDate = findNextWeekday(startDate)
+      stopDate = startDate.next_year
+      currentPayDate = startDate
+      while currentPayDate < stopDate - 1
+        schedule.push(currentPayDate)
+        currentPayDate += 1
+      end
     end
 
     schedule
