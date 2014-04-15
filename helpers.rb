@@ -7,6 +7,24 @@ def findFriday(date)
   date
 end
 
+def findPrevWeekday(date)
+  # check if date is a weekday, if not, finds the most
+  # previous weekday and returns it
+  until date.wday != 0 && date.wday != 6
+    date -= 1
+  end
+  date
+end
+
+def findNextWeekday(date)
+  # check if date is a weekday, if not, finds the
+  # next weekday and returns it
+  until date.wday != 0 && date.wday != 6
+    date += 1
+  end
+  date
+end
+
 def parseDate(dateString)
   # checks to see if the date is in valid format, then checks to see
   # if it is a valid date. if so, it returns a date object

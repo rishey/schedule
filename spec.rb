@@ -111,6 +111,53 @@ describe Interface do
 
   end
 
+  context "Frequency: Daily" do
+
+    cmdLineArgs = ["-f" ,"daily"]
+    interface = Interface.new(cmdLineArgs)
+
+    describe "#initialize" do
+      it "contains the command line arguments passed in in an array called args" do
+        expect(interface.args).to eq(cmdLineArgs)
+      end
+
+      it "contains the same number of items in interface.args as in cmdLineArgs " do
+        expect(interface.args.count).to eq(cmdLineArgs.count)
+      end
+    end
+
+    describe "#default" do
+      it "returns false there are cmd line arguments" do
+        expect(interface.default?).to eq(false)
+      end
+    end
+
+    describe ".parameters" do
+      it "returns the the startDate of today" do
+        expect(interface.parameters[:startDate]).to eq(Date.today)
+      end
+    end
+
+    describe "#getSchedule" do
+      it "returns array" do
+        expect(interface.getSchedule).to be_a(Array)
+      end
+
+      it "returns array where first value is = today if a weekday or the next weekday if not" do
+        expect(interface.getSchedule).to start_with(findNextWeekday(Date.today))
+      end
+
+      it "returns an array where the last value 365 days from now or the first workday before if that occurs on a weekend" do
+        expect(interface.getSchedule).to end_with(findPrevWeekday(Date.today+365))
+      end
+
+      it "returns an array containing between 358 and 372 pay dates" do
+        expect(interface.getSchedule.count).to be_within(7).of(365)
+      end
+    end
+
+  end
+
 
   context "Help given as first argument" do
 
