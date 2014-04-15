@@ -24,21 +24,21 @@ class Interface
   end
 
   def parse
-    if @args[0].downcase == "-s"
+    if @args[1]!= nil
       if startDate = parseDate(@args[1])
-        @parameters = {:startDate=>startDate,:frequency=>"bi-weekly", :dayOfWeek=>"friday"}
+        @parameters = {:startDate=>startDate,:frequency=>"bi-weekly"}
       else
         return false
       end
-    elsif @args[0].downcase == "-f" && @args[1].downcase == "daily"
+    elsif @args[0] != nil && @args[0].downcase == "daily"
       @parameters = {:startDate=>Date.today, :frequency=>"daily"}
-    elsif @args[0].downcase == "-f" && @args[1].downcase == "weekly"
+    elsif @args[0] != nil && @args[0].downcase == "weekly"
       @parameters = {:startDate=>Date.today, :frequency=>"weekly"}
-    elsif @args[0].downcase == "-f" && @args[1].downcase == "semi-monthly"
+    elsif @args[0] != nil && @args[0].downcase == "semi-monthly"
       @parameters = {:startDate=>Date.today, :frequency=>"semi-monthly"}
-    elsif @args[0].downcase == "-f" && @args[1].downcase == "monthly"
+    elsif @args[0] != nil && @args[0].downcase == "monthly"
       @parameters = {:startDate=>Date.today, :frequency=>"monthly"}
-    elsif @args[0].downcase == "-f" && @args[1].downcase == "bi-weekly"
+    elsif @args[0] != nil && @args[0].downcase == "bi-weekly"
       @parameters = {:startDate=>Date.today, :frequency=>"bi-weekly"}
     else
       false
@@ -59,8 +59,7 @@ class Interface
   def getSchedule
     schedule = []
     startDate = @parameters[:startDate]
-    frequency = @parameters[:frequency]
-    dayOfWeek = @parameters[:dayOfWeek]
+    p frequency = @parameters[:frequency]
 
     # if startDate.downcase == "today"
     #   startDate = Date.today

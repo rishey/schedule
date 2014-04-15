@@ -52,7 +52,7 @@ describe Interface do
 
   context "Weekly Frequency" do
 
-    cmdLineArgs = ["-f", "weekly"]
+    cmdLineArgs = ["weekly", nil]
     interface = Interface.new(cmdLineArgs)
 
     describe "#initialize" do
@@ -99,7 +99,7 @@ describe Interface do
 
   context "Semi-Monthly Frequency" do
 
-    cmdLineArgs = ["-f", "semi-monthly"]
+    cmdLineArgs = ["semi-monthly", nil]
     interface = Interface.new(cmdLineArgs)
 
     describe "#initialize" do
@@ -146,7 +146,7 @@ describe Interface do
 
   context "Monthly Frequency" do
 
-    cmdLineArgs = ["-f", "monthly"]
+    cmdLineArgs = ["monthly", nil]
     interface = Interface.new(cmdLineArgs)
 
     describe "#initialize" do
@@ -206,7 +206,7 @@ describe Interface do
 
   context "Only Start Date Given as Argument" do
 
-    cmdLineArgs = ["-s" ,"03/01/2014"]
+    cmdLineArgs = [nil ,"03/01/2014"]
     interface = Interface.new(cmdLineArgs)
 
     describe "#initialize" do
@@ -253,7 +253,7 @@ describe Interface do
 
   context "Frequency: Daily" do
 
-    cmdLineArgs = ["-f" ,"daily"]
+    cmdLineArgs = ["daily" ,nil]
     interface = Interface.new(cmdLineArgs)
 
     describe "#initialize" do
