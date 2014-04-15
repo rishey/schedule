@@ -147,12 +147,12 @@ describe Interface do
         expect(interface.getSchedule).to start_with(findNextWeekday(Date.today))
       end
 
-      it "returns an array where the last value 365 days from now or the first workday before if that occurs on a weekend" do
-        expect(interface.getSchedule).to end_with(findPrevWeekday(Date.today.next_year))
+      it "returns an array where the last value 1 year from now or the first workday before if that occurs on a weekend" do
+        expect(interface.getSchedule).to end_with(findPrevWeekday(Date.today.next_year-2))
       end
 
-      it "returns an array containing between 358 and 372 pay dates" do
-        expect(interface.getSchedule.count).to be_within(7).of(365)
+      it "returns an array containing 260 pay dates" do
+        expect(interface.getSchedule.count).to be(260)
       end
     end
 
