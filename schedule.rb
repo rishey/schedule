@@ -20,7 +20,6 @@ class Interface
       p @parameters
       # if parse == false then means bad commands = error
       p self.getSchedule
-
     end
   end
 

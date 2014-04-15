@@ -101,7 +101,7 @@ describe Interface do
       end
 
       it "returns an array where the last value is the 25 Fridays later than the startDate" do
-        expect(interface.getSchedule).to end_with(findFriday(Date.today).+350)
+        expect(interface.getSchedule).to end_with(findFriday(Date.new(2014,03,01)).+350)
       end
 
       it "returns an array containing 26 pay dates" do
