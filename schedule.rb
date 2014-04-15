@@ -7,9 +7,7 @@ class Interface
   attr_accessor :parameters
 
   def initialize args
-    p @args = args
-    p "THOSE WERE THE ARGS"
-
+    @args = args
     @parameters = {}
 
     if default?
@@ -24,42 +22,58 @@ class Interface
   end
 
   def parse
-    if @args[1]!= nil
-      if startDate = parseDate(@args[1])
-        @parameters = {:startDate=>startDate,:frequency=>"bi-weekly"}
-      else
-        return false
-      end
-    elsif @args[0] != nil && @args[0].downcase == "daily"
-      @parameters = {:startDate=>Date.today, :frequency=>"daily"}
-    elsif @args[0] != nil && @args[0].downcase == "weekly"
-      @parameters = {:startDate=>Date.today, :frequency=>"weekly"}
-    elsif @args[0] != nil && @args[0].downcase == "semi-monthly"
-      @parameters = {:startDate=>Date.today, :frequency=>"semi-monthly"}
-    elsif @args[0] != nil && @args[0].downcase == "monthly"
-      @parameters = {:startDate=>Date.today, :frequency=>"monthly"}
-    elsif @args[0] != nil && @args[0].downcase == "bi-weekly"
-      @parameters = {:startDate=>Date.today, :frequency=>"bi-weekly"}
-    else
-      false
+    if @args[0] == nil
+      @args[0] = "bi-weekly"
     end
+
+    if @args[1] == nil
+      @parameters[:startDate] = Date.today
+      @parameters[:frequency] = args[0]
+    end
+
+    # p @parameters = {:startDate=>parseDate(args[1]), :frequency=>args[0]}
+
+    # if @args[1]!= nil
+    #   if startDate = parseDate(@args[1])
+    #     @parameters = {:startDate=>startDate, :frequency=>"bi-weekly"}
+    #   elsif @args[1] == nil
+    #     # @parameters = {:startDate=>Date.today, :frequency=>"bi-weekly"}
+    #     @args[1] = Date.today
+    #   else
+    #     false
+    #   end
+    # end
+
+    # if @args[0] == nil
+    #   @args[0] = "bi-weekly"
+    # elsif @args[0] != nil && @args[0].downcase == "daily"
+    #   @parameters = {:startDate=>Date.today, :frequency=>"daily"}
+    # elsif @args[0] != nil && @args[0].downcase == "weekly"
+    #   @parameters = {:startDate=>Date.today, :frequency=>"weekly"}
+    # elsif @args[0] != nil && @args[0].downcase == "semi-monthly"
+    #   @parameters = {:startDate=>Date.today, :frequency=>"semi-monthly"}
+    # elsif @args[0] != nil && @args[0].downcase == "monthly"
+    #   @parameters = {:startDate=>Date.today, :frequency=>"monthly"}
+    # elsif @args[0] != nil && @args[0].downcase == "bi-weekly"
+    #   @parameters = {:startDate=>Date.today, :frequency=>"bi-weekly"}
+    # else
+    #   false
+    # end
   end
 
   def default?
     if @args[0] == nil && @args[1] == nil
-      @parameters = {:startDate=>Date.today, :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
+      @parameters = {:startDate=>Date.today, :frequency=>"bi-weekly"}
       return true
     else
       false
     end
   end
 
-
-
   def getSchedule
     schedule = []
     startDate = @parameters[:startDate]
-    p frequency = @parameters[:frequency]
+    frequency = @parameters[:frequency]
 
     # if startDate.downcase == "today"
     #   startDate = Date.today
@@ -112,21 +126,11 @@ class Interface
 end
 
 OptionParser.new do |o|
-  o.on('-s STARTDATE') { |startDate| $startDate = startDate }
-  o.on('-f FREQUENCY') { |frequency| $frequency = frequency }
+  o.on('-s START DATE in format mm/dd/yyyy') { |startDate| $startDate = startDate }
+  o.on('-f FREQUENCY (daily, weekly, bi-weekly, semi-monthly, monthly)') { |frequency| $frequency = frequency }
   o.on('-help') { puts o; exit }
   o.parse!
 end
-p $startDate
-p $frequency
-p ARGV
+p [$frequency,$startDate]
 Interface.new([$frequency,$startDate])
-# if i.help?
-#   print i.helpText
-# end
-# p i.schedule
 
-# p ARGV
-# p interface.default?
-# p interface.help?
-# p interface.parameters
