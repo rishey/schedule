@@ -28,7 +28,7 @@ class Interface
   def parse
     if @args[0].downcase == "-s"
       if startDate = parseDate(@args[1])
-        @parameters = {:startDate=>startDate, :frequency=>"bi-weekly", :dayOfWeek=>"friday"}
+        @parameters = {:startDate=>startDate,:frequency=>"bi-weekly", :dayOfWeek=>"friday"}
       else
         return false
       end
@@ -36,6 +36,8 @@ class Interface
       @parameters = {:startDate=>Date.today, :frequency=>"daily"}
     elsif @args[0].downcase == "-f" && @args[1].downcase == "weekly"
       @parameters = {:startDate=>Date.today, :frequency=>"weekly"}
+    elsif @args[0].downcase == "-f" && @args[1].downcase == "semi-monthly"
+      @parameters = {:startDate=>Date.today, :frequency=>"semi-monthly"}
     else
       false
     end
@@ -85,7 +87,6 @@ class Interface
         schedule.push(currentPayDate)
         currentPayDate = findNextWeekday(currentPayDate+1)
       end
-
     elsif frequency.downcase == "weekly"
       startDate = findFriday(startDate)
       stopDate = startDate.next_year
@@ -93,6 +94,14 @@ class Interface
       while currentPayDate < stopDate - 1
         schedule.push(currentPayDate)
         currentPayDate += 7
+      end
+    elsif frequency.downcase == "semi-monthly"
+      startDate = find1st15th(startDate)
+      stopDate = startDate.next_year
+      currentPayDate = startDate
+      while currentPayDate < (stopDate)
+        schedule.push(currentPayDate)
+        currentPayDate = find1st15th(currentPayDate + 14)
       end
     end
 

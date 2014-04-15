@@ -1,8 +1,6 @@
 require "./schedule.rb"
 require 'Date'
 
-# TESTING  INTERFACE WITH NO ARGUMENTS
-
 describe Interface do
 
   context "No Arguments" do
@@ -136,7 +134,7 @@ describe Interface do
       end
 
       it "returns an array where the last value is the 51 weeks later than the first value" do
-        expect(interface.getSchedule).to end_with(findFriday(Date.today+355))
+        expect(interface.getSchedule).to end_with(find1st15th(Date.today+350))
       end
 
       it "returns an array containing 24 pay dates" do

@@ -25,6 +25,17 @@ def findNextWeekday(date)
   date
 end
 
+def find1st15th(date)
+  # check if date is a 1st or 15th of the month
+  # if not, find the next 1st or 1th of a month
+  # do findPrevWeekday on it to make sure it's not
+  # a weekend
+  until date.day == 1 || date.day == 15
+    date += 1
+  end
+  findPrevWeekday(date)
+end
+
 def parseDate(dateString)
   # checks to see if the date is in valid format, then checks to see
   # if it is a valid date. if so, it returns a date object
