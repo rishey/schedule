@@ -144,6 +144,52 @@ describe Interface do
 
   end
 
+  context "Monthly Frequency" do
+
+    cmdLineArgs = ["-f", "monthly"]
+    interface = Interface.new(cmdLineArgs)
+
+    describe "#initialize" do
+      it "contains the command line arguments passed in in an array called args" do
+        expect(interface.args).to eq(cmdLineArgs)
+      end
+
+      it "contains the same number of items in interface.args as in cmdLineArgs " do
+        expect(interface.args.count).to eq(cmdLineArgs.count)
+      end
+    end
+
+    describe "#default?" do
+      it "returns true if there are no cmdLineArgs" do
+        expect(interface.default?).to eq(false)
+      end
+    end
+
+    describe ".parameters" do
+      it "returns a hash" do
+        expect(interface.parameters).to be_a(Hash)
+      end
+    end
+
+    describe "#getSchedule" do
+      it "returns array" do
+        expect(interface.getSchedule).to be_a(Array)
+      end
+
+      it "returns array where first value is = the next 1st of a month" do
+        expect(interface.getSchedule).to start_with(find1st(Date.today))
+      end
+
+      it "returns an array where the last value is the 51 weeks later than the first value" do
+        expect(interface.getSchedule).to end_with(find1st(Date.today+350))
+      end
+
+      it "returns an array containing 12 pay dates" do
+        expect(interface.getSchedule.count).to eq(12)
+      end
+    end
+
+  end
 
 
   context "Bad Arguments" do

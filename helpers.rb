@@ -27,10 +27,21 @@ end
 
 def find1st15th(date)
   # check if date is a 1st or 15th of the month
-  # if not, find the next 1st or 1th of a month
+  # if not, find the next 1st or 15th of a month
   # do findPrevWeekday on it to make sure it's not
   # a weekend
   until date.day == 1 || date.day == 15
+    date += 1
+  end
+  findPrevWeekday(date)
+end
+
+def find1st(date)
+  # check if date is a 1st of the month
+  # if not, find the next 1st of a month
+  # do findPrevWeekday on it to make sure it's not
+  # a weekend
+  until date.day == 1
     date += 1
   end
   findPrevWeekday(date)

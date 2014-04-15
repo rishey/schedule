@@ -38,6 +38,8 @@ class Interface
       @parameters = {:startDate=>Date.today, :frequency=>"weekly"}
     elsif @args[0].downcase == "-f" && @args[1].downcase == "semi-monthly"
       @parameters = {:startDate=>Date.today, :frequency=>"semi-monthly"}
+    elsif @args[0].downcase == "-f" && @args[1].downcase == "monthly"
+      @parameters = {:startDate=>Date.today, :frequency=>"monthly"}
     else
       false
     end
@@ -102,6 +104,14 @@ class Interface
       while currentPayDate < (stopDate)
         schedule.push(currentPayDate)
         currentPayDate = find1st15th(currentPayDate + 14)
+      end
+     elsif frequency.downcase == "monthly"
+      startDate = find1st(startDate)
+      stopDate = startDate.next_year
+      currentPayDate = startDate
+      while currentPayDate < (stopDate)
+        schedule.push(currentPayDate)
+        currentPayDate = find1st(currentPayDate + 25)
       end
     end
 
