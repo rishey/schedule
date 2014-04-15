@@ -148,7 +148,7 @@ describe Interface do
       end
 
       it "returns an array where the last value 365 days from now or the first workday before if that occurs on a weekend" do
-        expect(interface.getSchedule).to end_with(findPrevWeekday(Date.today+365))
+        expect(interface.getSchedule).to end_with(findPrevWeekday(Date.today.next_year))
       end
 
       it "returns an array containing between 358 and 372 pay dates" do

@@ -78,7 +78,7 @@ class Interface
       currentPayDate = startDate
       while currentPayDate < stopDate - 1
         schedule.push(currentPayDate)
-        currentPayDate += 1
+        p currentPayDate = findNextWeekday(currentPayDate+1)
       end
     end
 
