@@ -2,7 +2,7 @@ require 'Date'
 require './helpers.rb'
 
 class Interface
-  attr_reader :args, :schedule
+  attr_reader :args, :helpText, :schedule
   attr_accessor :parameters
 
   def initialize args
@@ -13,15 +13,16 @@ class Interface
     @parameters = {}
 
     if self.help?
-      @helpText
+      print @helpText
+
     elsif default?
-      schedule = getSchedule
-      # schedule.each do |date|
-      #   p date.to_s
-      # end
+      printOut(getSchedule)
     elsif parse
-      # if parse == false then means bad commands = error
-      getSchedule
+      printOut(getSchedule)
+    else
+      print "\nYou made an entry error. Please try again.\n\n"
+      print @helpText
+
     end
   end
 
@@ -40,6 +41,8 @@ class Interface
       @parameters = {:startDate=>Date.today, :frequency=>"semi-monthly"}
     elsif @args[0].downcase == "-f" && @args[1].downcase == "monthly"
       @parameters = {:startDate=>Date.today, :frequency=>"monthly"}
+    elsif @args[0].downcase == "-f" && @args[1].downcase == "bi-weekly"
+      @parameters = {:startDate=>Date.today, :frequency=>"bi-weekly"}
     else
       false
     end
@@ -121,6 +124,11 @@ class Interface
 end
 
 Interface.new(ARGV)
+# if i.help?
+#   print i.helpText
+# end
+# p i.schedule
+
 # p ARGV
 # p interface.default?
 # p interface.help?
