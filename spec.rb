@@ -298,6 +298,54 @@ describe Interface do
 
   end
 
+  context "Frequency: Monthly and startDate: 03/01/2014" do
+
+    cmdLineArgs = ["monthly", "03/01/2014"]
+    interface = Interface.new(cmdLineArgs)
+
+    describe "#initialize" do
+      it "contains the command line arguments passed in in an array called args" do
+        expect(interface.args).to eq(cmdLineArgs)
+      end
+
+      it "contains the same number of items in interface.args as in cmdLineArgs " do
+        expect(interface.args.count).to eq(cmdLineArgs.count)
+      end
+    end
+
+    describe "#default" do
+      it "returns false there are cmd line arguments" do
+        expect(interface.default?).to eq(false)
+      end
+    end
+
+    describe ".parameters" do
+      it "returns the the startDate of 03/31/2014" do
+        expect(interface.parameters[:startDate]).to eq(Date.new(2014,3,01))
+      end
+    end
+
+    describe "#getSchedule" do
+      it "returns array" do
+        expect(interface.getSchedule).to be_a(Array)
+      end
+
+      it "returns array where first value is = 03/01/2014 if a weekday or the previous weekday if not" do
+        expect(interface.getSchedule).to start_with(Date.new(2014,2,28))
+      end
+
+      it "returns an array where the last value 1 year from now or the first workday before if that occurs on a weekend" do
+        expect(interface.getSchedule).to end_with(findPrevWeekday(Date.new(2014,2,28).next_year))
+      end
+
+      it "returns an array containing 13 pay dates" do
+        expect(interface.getSchedule.count).to be(13)
+      end
+    end
+
+  end
+
+
 
 
 

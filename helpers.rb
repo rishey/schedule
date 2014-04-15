@@ -68,6 +68,5 @@ end
 def printOut(schedule)
   schedule.each do |payDate|
     p payDate.strftime('%m/%d/%Y')
-
   end
 end
